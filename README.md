@@ -69,7 +69,7 @@ Queste due informazioni sono complementari: il tipo di impianto descrive **come*
 
 Ad esempio, un `Generatore a combustione` può essere alimentato da gas naturale, GPL, gasolio o altri combustibili. Allo stesso modo, l’`Energia elettrica` può alimentare una `Pompa di calore`, generalmente più efficiente, oppure un `Generatore ad effetto Joule`, che indica riscaldamento elettrico diretto.
 
-Per questo motivo entrambe le colonne sono utili per il modello di classificazione: insieme permettono di rappresentare meglio il comportamento energetico dell’edificio e possono contribuire alla previsione della classe energetica.
+Per questo motivo entrambe le colonne sono utili ma un pochino ridondanti, per questo è stata eliminata la colonna CI_TIPO_IMPIANTO_1
 
 ## File principale del progetto
 
@@ -101,17 +101,18 @@ Dopo la divisione del dataset in training e test set, il lavoro prosegue con lo 
 
 Questa fase è importante perché molti algoritmi di machine learning non possono utilizzare direttamente valori testuali. Per questo motivo, le colonne categoriche devono essere analizzate, pulite e trasformate in variabili numeriche tramite tecniche di encoding.
 
-Le colonne stringa individuate verranno analizzate per capire:
+Al termine le colonne sono solo numeriche e booleani, sono state eliminate le righe che contengono valori nulli e quelli con valori sbagliati. 
 
-- quali valori unici contengono;
-- se sono presenti valori mancanti;
-- se alcune categorie sono troppo rare;
-- se le categorie hanno una relazione logica con la classe energetica;
-- quale tecnica di encoding applicare prima dell’addestramento del modello.
+## Visualizzazione dei dati
 
-## Come usare il progetto
+Sono state visualizzate alcune variabili tramite istogrammi per analizzarne la distribuzione. In questa fase sono stati individuati e rimossi gli outlier presenti nella colonna `NUMERO_UNITA_IMMOBILIARI`.
 
-Installare le librerie necessarie:
+## Uso dei modelli
 
-```bash
-pip install -r requirements.txt
+Sono stati utilizzati due modelli di classificazione per valutare la capacità di distinguere tra le due categorie di classe energetica sul dataset di test:
+
+- `LogisticRegression`
+- `RandomForestClassifier`
+
+Il modello `RandomForestClassifier` è stato testato con 100 alberi.  
+Il risultato migliore è stato ottenuto con `RandomForestClassifier` configurato con 100 alberi.
